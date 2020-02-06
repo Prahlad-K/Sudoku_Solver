@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/prahlad/Sudoku_Project/grid_detect.cpp
+cv.h
+-
+highgui.h
+-
+opencv2/opencv.hpp
+-
+vector
+-
+
+/usr/include/opencv/cv.h
+opencv2/core/core_c.h
+/usr/include/opencv/opencv2/core/core_c.h
+opencv2/imgproc/imgproc_c.h
+/usr/include/opencv/opencv2/imgproc/imgproc_c.h
+opencv2/photo/photo_c.h
+/usr/include/opencv/opencv2/photo/photo_c.h
+opencv2/video/tracking_c.h
+/usr/include/opencv/opencv2/video/tracking_c.h
+opencv2/objdetect/objdetect_c.h
+/usr/include/opencv/opencv2/objdetect/objdetect_c.h
+
+/usr/include/opencv/highgui.h
+opencv2/core/core_c.h
+/usr/include/opencv/opencv2/core/core_c.h
+opencv2/highgui/highgui_c.h
+/usr/include/opencv/opencv2/highgui/highgui_c.h
+
