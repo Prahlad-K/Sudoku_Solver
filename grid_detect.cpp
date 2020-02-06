@@ -3,6 +3,8 @@
 #include <opencv2/opencv.hpp>
 #include <vector>
 
+#include "digit_recognizer.cpp"
+
 using namespace cv;
 using namespace std;
 
@@ -121,7 +123,9 @@ int main()
 	//create a same sized empty image container
 	Mat outerBox = Mat(sudoku.size(), CV_8UC1);
 
+    // apply a Gaussian Blur to this sudoku 
 	GaussianBlur(sudoku, sudoku, Size(11, 11), 0);
+
 	//Printing the blurred image
 	/*namedWindow("Blur", CV_WINDOW_AUTOSIZE );
 	imshow("Blur", sudoku);
@@ -132,7 +136,7 @@ int main()
 	//calculates mean over a 5*5 window and subtracts 2 from this mean (threshold level for every pixel)
 
 	bitwise_not(outerBox, outerBox);
-	//invert the image cause we're interested in the borders, make em white
+	//invert the image cause we're interested in the borders, make em white!
 
 	//namedWindow("Invert", CV_WINDOW_AUTOSIZE);
     //imshow("Invert", outerBox);
@@ -163,6 +167,8 @@ int main()
     		{
     			//flood fill this blob with gray and check it's area
     			int area = floodFill(outerBox, Point(x,y), CV_RGB(0, 0, 64));
+                // floodFill fills the area under the outerBox starting at point(x, y) 
+                // along the lines of the edges it's a part of, with color grey (0, 0, 64)
     			if(area>max)
     			{
     				maxPt = Point(x, y);
@@ -188,6 +194,7 @@ int main()
         	//and the value of pixel is gray
             if(row[x]==64 && x!=maxPt.x && y!=maxPt.y)
             {
+                //flood fill other minor blobs to black, not required!
                 int area = floodFill(outerBox, Point(x,y), CV_RGB(0,0,0));
             }
         }
@@ -377,5 +384,47 @@ int main()
     cvNamedWindow("Undistorted");
     imshow("Undistorted", undistorted);
     waitKey(0);
+
+    imwrite("undistorted_sudoku.jpg", undistorted);
+
+    Mat undistortedThreshed = undistorted.clone();
+    adaptiveThreshold(undistorted, undistortedThreshed, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY_INV, 101, 1);
+
+    DigitRecognizer *dr = new DigitRecognizer();
+    bool b = dr->train("./MNIST/train-images.idx3-ubyte", "./MNIST/train-labels.idx1-ubyte");
+
+    int dist = ceil((double)maxLength/9);
+    Mat currentCell = Mat(dist, dist, CV_8UC1);
+
+    for(int j=0;j<9;j++)
+    {
+        for(int i=0;i<9;i++)
+        {
+            for(int y=0;y<dist && j*dist+y<undistortedThreshed.cols;y++)
+            {
+
+                uchar* ptr = currentCell.ptr(y);
+
+                for(int x=0;x<dist && i*dist+x<undistortedThreshed.rows;x++)
+                {
+                    ptr[x] = undistortedThreshed.at<uchar>(j*dist+y, i*dist+x);
+                }
+            }            
+
+            Moments m = cv::moments(currentCell, true);
+            int area = m.m00;
+            if(area > currentCell.rows*currentCell.cols/5)
+            {
+                int number = dr->classify(currentCell);
+                printf("%d ", number);
+            }
+            else
+            {
+                printf("  ");
+            }
+        }
+        printf(" ");
+    }
+
     return 0;
 }

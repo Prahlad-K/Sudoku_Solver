@@ -1,4 +1,4 @@
-# Install script for directory: /home/prahlad/Sudoku_Project
+# Install script for directory: /home/prahlad/Sudoku_Solver
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/prahlad/Sudoku_Project/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/prahlad/Sudoku_Solver/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

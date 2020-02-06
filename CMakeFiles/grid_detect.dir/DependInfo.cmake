@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/prahlad/Sudoku_Project/grid_detect.cpp" "/home/prahlad/Sudoku_Project/CMakeFiles/grid_detect.dir/grid_detect.cpp.o"
+  "/home/prahlad/Sudoku_Solver/grid_detect.cpp" "/home/prahlad/Sudoku_Solver/CMakeFiles/grid_detect.dir/grid_detect.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
