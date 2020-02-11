@@ -17,6 +17,8 @@ bits/stdc++.h
 -
 ml.h
 -
+cerrno
+-
 digit_recognizer.h
 /home/prahlad/Sudoku_Solver/digit_recognizer.h
 

@@ -18,7 +18,7 @@ public:
 	int classify(Mat img);
 private:
 	Mat preprocessImage(Mat img);
-	int readFlippedInteger(FILE *fp);
+	int readFlippedInteger(int i);
 private:
 	Ptr<KNearest> knn;
 	int numRows, numCols, numImages;
