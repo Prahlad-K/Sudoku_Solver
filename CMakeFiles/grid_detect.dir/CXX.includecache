@@ -19,6 +19,8 @@ ml.h
 -
 cerrno
 -
+string
+-
 digit_recognizer.h
 /home/prahlad/Sudoku_Solver/digit_recognizer.h
 

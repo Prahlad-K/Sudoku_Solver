@@ -4,12 +4,16 @@
 #include <bits/stdc++.h>
 #include <ml.h>
 #include <cerrno>
+#include <string>
 
 #include "digit_recognizer.h"
 using namespace cv;
 using namespace ml;
 using namespace std;
 #define MAX_NUM_IMAGES    60000
+#define PIXELS_IN_IMAGE 28*28
+
+#define ENABLE_TRAIN 1
 
 typedef unsigned char BYTE;
 
@@ -36,111 +40,117 @@ int DigitRecognizer::readFlippedInteger(int i)
 
 }
 
-bool DigitRecognizer::train(char *trainPath, char *labelsPath)
-{
+int DigitRecognizer::loadMNIST(char* csv_filename, Mat& training_data, Mat& label_data) {
 
-	ifstream f1 (trainPath);
-	ifstream f2 (labelsPath);
-    if (f1.is_open())
-    {
-        int magic_number=0;
-        int number_of_images=0;
-        int n_rows=0;
-        int n_cols=0;
-        f1.read((char*)&magic_number,sizeof(magic_number)); 
-        magic_number= readFlippedInteger(magic_number);
-        f1.read((char*)&number_of_images,sizeof(number_of_images));
-        number_of_images= readFlippedInteger(number_of_images);
-        f1.read((char*)&n_rows,sizeof(n_rows));
-        n_rows= readFlippedInteger(n_rows);
-        f1.read((char*)&n_cols,sizeof(n_cols));
-        n_cols= readFlippedInteger(n_cols);
-        for(int i=0;i<number_of_images;++i)
-        {
-            for(int r=0;r<n_rows;++r)
+	fstream fin; 
+  
+    // Open an existing file 
+    fin.open(csv_filename, ios::in); 
+  
+    // Read the Data from the file 
+    // as String Vector 
+    vector<vector<int>> training_vectors;
+    vector<int> training_classes; 
+    string line, word, temp; 
+  
+    while (fin >> temp) 
+    { 
+
+        vector<int> training_vector;
+        int training_class;
+
+        stringstream s(temp); 
+  
+        // read every column data of a row and 
+        // store it in a string variable, 'word' 
+        int count = 0;
+        while (getline(s, word, ',')) { 
+  
+            // add all the column data 
+            // of a row to a vector 
+            if(count ==0)
             {
-                for(int c=0;c<n_cols;++c)
-                {
-                    unsigned char temp=0;
-                    f1.read((char*)&temp,sizeof(temp));
-
-                }
+                training_class = stoi(word);
+                count++;
+            }
+            else
+            {
+                training_vector.push_back(stoi(word)); 
             }
         }
-        numImages = number_of_images;
-    	numRows = n_rows;
-    	numCols = n_cols;
 
-    	f2.read((char*)&magic_number,sizeof(magic_number)); 
-        magic_number= readFlippedInteger(magic_number);
-        f2.read((char*)&number_of_images,sizeof(number_of_images));
-        number_of_images= readFlippedInteger(number_of_images);
-        cout<<number_of_images<<endl;
-
+        training_vectors.push_back(training_vector);
+        training_classes.push_back(training_class);
     }
 
-    //cout<<numImages<<" "<<numRows<<" "<<numCols<<endl;
-    if(numImages > MAX_NUM_IMAGES) numImages = MAX_NUM_IMAGES;
+    cout<<training_classes.size()<<" "<<training_vectors[0].size()<<endl;
 
-    //////////////////////////////////////////////////////////////////
-    // Go through each training data entry and save a
+    training_data = Mat(training_classes.size(), training_vectors[0].size(), CV_8U);
+    label_data =  Mat(training_classes.size(), 1, CV_8U);
 
-    // label for each digit
+    Mat one_cell = Mat(28, 28, CV_8U);
 
-    int size = numRows*numCols; // size of each image
-
-    //cout<<numRows<<" "<<numCols<<endl;
-    // trainingVectors and trainingClasses have the shape (numImages, size)
-
-    Mat trainingVectors = Mat(numImages, size, CV_32F);
-
-    Mat trainingClasses = Mat(numImages, 1, CV_32F);
-
-
-    BYTE *temp = new BYTE[size];
-    BYTE tempClass=0;
-    for(int i=0;i<numImages;i++)
+    for(int i=0;i<training_data.rows;i++)
     {
-
-        f1.read((char*)temp, size);
-
-        f2.read((char*)(&tempClass), 1);
-
-	    const auto val = tempClass;
-	    float result;
-	    memcpy(&result, &val, sizeof(float));
-	    //cout<<result<<endl;
-        trainingClasses.at<float>(i) = result;
-
-        for(int k=0;k<size;k++)
-        {
-        	const auto val = temp[k];
-		    float result;
-		    memcpy(&result, &val, sizeof(float));
-            trainingVectors.at<float>(i,k) = result; ///sumofsquares;
-        }
-
+    	for(int j=0;j<training_data.cols;j++)
+    	{
+    		training_data.at<uchar>(i, j) = (uchar)training_vectors[i][j];
+    	}
     }
-    // filling up trainingVectors and trainingClasses with actual data from the MNIST files. 
 
-    knn->train(_InputArray(trainingVectors), ROW_SAMPLE, _InputArray(trainingClasses));
-    f1.close();
-    f2.close();
+    int count = 0;
+    for(int i=0;i<28;i++)
+    {
+    	for(int j=0;j<28;j++)
+    	{
+    		one_cell.at<uchar>(i, j) = (uchar)training_vectors[0][count++];
+    	}
+    }
 
+    //cvNamedWindow("Onecell");
+    //imshow("Onecell", one_cell);
+    //waitKey(0);
 
-	//cout<<"DigitRecognizer trained!"<<endl;
+    for(int i=0;i<label_data.rows;i++)
+    {
+    	label_data.at<uchar>(i, 0) = (uchar)training_classes[i];
+    }
 
+    return 1;
+}
+
+bool DigitRecognizer::train(char *path)
+{
+	try
+	{
+		Mat train_data_mat, train_label_mat;
+		
+		loadMNIST(path, train_data_mat, train_label_mat);
+		
+		train_data_mat.convertTo(train_data_mat, CV_32FC1);
+		train_label_mat.convertTo(train_label_mat, CV_32SC1);
+
+		numImages = train_data_mat.rows;
+		numRows = 28;
+		numCols = 28;
+
+		knn->setDefaultK(10);
+		knn->train(train_data_mat, ml::SampleTypes::ROW_SAMPLE, train_label_mat);
+		cout<<"Training done!\n";
+	}
+	catch (const Exception& ex)
+	{
+		cout << "Error: " << ex.what() << endl;
+	}
     return true;
 }
 
 int DigitRecognizer::classify(cv::Mat img)
 {
     Mat cloneImg = preprocessImage(img);
-    //cout<<"DigitRecognizer classified!"<<endl;
-    //int rows = cloneImg.rows;
-	//int cols = cloneImg.cols;
-	//cout<<rows<<" "<<cols<<endl;
-    return knn->predict(_InputArray(cloneImg));
+    Mat result_mat;
+	int response = knn->findNearest(cloneImg, knn->getDefaultK(), result_mat);
+    return response;
 }
 
 Mat DigitRecognizer::preprocessImage(Mat img)
@@ -194,7 +204,7 @@ Mat DigitRecognizer::preprocessImage(Mat img)
 
     Mat newImg;
 
-    newImg = newImg.zeros(img.rows, img.cols, CV_32F);
+    newImg = newImg.zeros(img.rows, img.cols, CV_8UC1);
 
     int startAtX = (newImg.cols/2)-(colRight-colLeft)/2;
 
@@ -209,7 +219,7 @@ Mat DigitRecognizer::preprocessImage(Mat img)
         }
     }
 
-    Mat cloneImg = Mat(numRows, numCols, CV_32F);
+    Mat cloneImg = Mat(numRows, numCols, CV_8UC1);
 
     resize(newImg, cloneImg, Size(numCols, numRows));
 
@@ -224,7 +234,15 @@ Mat DigitRecognizer::preprocessImage(Mat img)
         floodFill(cloneImg, cvPoint(i, cloneImg.rows-1), cvScalar(0));
     }
 
-    cloneImg = cloneImg.reshape(1, 1);
+    cloneImg.convertTo(cloneImg, CV_32FC1);
+    cloneImg = cloneImg.reshape(0, 1);
+
+/*
+	namedWindow("cloneImg", CV_WINDOW_AUTOSIZE);
+	imshow("cloneImg", cloneImg);
+	waitKey(0);
+*/	
+
 
     //cout<<"DigitRecognizer preproccessed!"<<endl;
 

@@ -391,7 +391,7 @@ int main()
     adaptiveThreshold(undistorted, undistortedThreshed, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY_INV, 101, 1);
 
     DigitRecognizer *dr = new DigitRecognizer();
-    bool b = dr->train("./MNIST/train-images-idx3-ubyte", "./MNIST/train-labels-idx1-ubyte");
+    bool b = dr->train("/home/prahlad/MNIST/mnist_train.csv");
 
     int dist = ceil((double)maxLength/9);
     Mat currentCell = Mat(dist, dist, CV_8UC1);
@@ -423,7 +423,7 @@ int main()
                 printf("  ");
             }
         }
-        printf(" ");
+        printf("\n");
     }
 
     return 0;
