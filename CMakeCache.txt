@@ -209,6 +209,18 @@ grid_detect_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
 grid_detect_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake
+morph_operations_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+morph_operations_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+preprocessing_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+preprocessing_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
 sudoku_solver_main_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake

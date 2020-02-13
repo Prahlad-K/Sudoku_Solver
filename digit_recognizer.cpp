@@ -156,6 +156,9 @@ int DigitRecognizer::classify(cv::Mat img)
 Mat DigitRecognizer::preprocessImage(Mat img)
 {
 
+	namedWindow("img", CV_WINDOW_AUTOSIZE);
+	imshow("img", img);
+	waitKey(0);
     int rowTop=-1, rowBottom=-1, colLeft=-1, colRight=-1;
 
     Mat temp;
@@ -238,9 +241,9 @@ Mat DigitRecognizer::preprocessImage(Mat img)
         floodFill(cloneImg, cvPoint(i, cloneImg.rows-1), cvScalar(0));
     }
 
-    namedWindow("cloneImg", CV_WINDOW_AUTOSIZE);
-	imshow("cloneImg", cloneImg);
-	waitKey(0);
+ //    namedWindow("cloneImg", CV_WINDOW_AUTOSIZE);
+	// imshow("cloneImg", cloneImg);
+	// waitKey(0);
     cloneImg.convertTo(cloneImg, CV_32FC1);
     cloneImg = cloneImg.reshape(0, 1);
 
