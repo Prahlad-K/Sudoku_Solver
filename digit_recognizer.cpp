@@ -107,9 +107,9 @@ int DigitRecognizer::loadMNIST(char* csv_filename, Mat& training_data, Mat& labe
     	}
     }
 
-    //cvNamedWindow("Onecell");
-    //imshow("Onecell", one_cell);
-    //waitKey(0);
+    // cvNamedWindow("Onecell");
+    // imshow("Onecell", one_cell);
+    // waitKey(0);
 
     for(int i=0;i<label_data.rows;i++)
     {
@@ -146,7 +146,7 @@ bool DigitRecognizer::train(char *path)
 }
 
 int DigitRecognizer::classify(cv::Mat img)
-{
+{    
     Mat cloneImg = preprocessImage(img);
     Mat result_mat;
 	int response = knn->findNearest(cloneImg, knn->getDefaultK(), result_mat);
@@ -223,6 +223,10 @@ Mat DigitRecognizer::preprocessImage(Mat img)
 
     resize(newImg, cloneImg, Size(numCols, numRows));
 
+    namedWindow("cloneImg1", CV_WINDOW_AUTOSIZE);
+	imshow("cloneImg1", cloneImg);
+	waitKey(0);
+
     // Now fill along the borders
     for(int i=0;i<cloneImg.rows;i++)
     {
@@ -234,14 +238,13 @@ Mat DigitRecognizer::preprocessImage(Mat img)
         floodFill(cloneImg, cvPoint(i, cloneImg.rows-1), cvScalar(0));
     }
 
+    namedWindow("cloneImg", CV_WINDOW_AUTOSIZE);
+	imshow("cloneImg", cloneImg);
+	waitKey(0);
     cloneImg.convertTo(cloneImg, CV_32FC1);
     cloneImg = cloneImg.reshape(0, 1);
 
-/*
-	namedWindow("cloneImg", CV_WINDOW_AUTOSIZE);
-	imshow("cloneImg", cloneImg);
-	waitKey(0);
-*/	
+	
 
 
     //cout<<"DigitRecognizer preproccessed!"<<endl;

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project( grid_detect )
+project( sudoku_solver_main )
 find_package( OpenCV REQUIRED )
-add_executable( grid_detect grid_detect.cpp )
-target_link_libraries( grid_detect ${OpenCV_LIBS} )
+add_executable( sudoku_solver_main sudoku_solver_main.cpp )
+target_link_libraries( sudoku_solver_main ${OpenCV_LIBS} )

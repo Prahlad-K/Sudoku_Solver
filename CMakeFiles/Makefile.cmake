@@ -48,5 +48,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/grid_detect.dir/DependInfo.cmake"
+  "CMakeFiles/sudoku_solver_main.dir/DependInfo.cmake"
   )

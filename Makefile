@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named grid_detect
+# Target rules for targets named sudoku_solver_main
 
 # Build rule for target.
-grid_detect: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 grid_detect
-.PHONY : grid_detect
+sudoku_solver_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sudoku_solver_main
+.PHONY : sudoku_solver_main
 
 # fast build rule for target.
-grid_detect/fast:
-	$(MAKE) -f CMakeFiles/grid_detect.dir/build.make CMakeFiles/grid_detect.dir/build
-.PHONY : grid_detect/fast
+sudoku_solver_main/fast:
+	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/build
+.PHONY : sudoku_solver_main/fast
 
-grid_detect.o: grid_detect.cpp.o
+sudoku_solver_main.o: sudoku_solver_main.cpp.o
 
-.PHONY : grid_detect.o
+.PHONY : sudoku_solver_main.o
 
 # target to build an object file
-grid_detect.cpp.o:
-	$(MAKE) -f CMakeFiles/grid_detect.dir/build.make CMakeFiles/grid_detect.dir/grid_detect.cpp.o
-.PHONY : grid_detect.cpp.o
+sudoku_solver_main.cpp.o:
+	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/sudoku_solver_main.cpp.o
+.PHONY : sudoku_solver_main.cpp.o
 
-grid_detect.i: grid_detect.cpp.i
+sudoku_solver_main.i: sudoku_solver_main.cpp.i
 
-.PHONY : grid_detect.i
+.PHONY : sudoku_solver_main.i
 
 # target to preprocess a source file
-grid_detect.cpp.i:
-	$(MAKE) -f CMakeFiles/grid_detect.dir/build.make CMakeFiles/grid_detect.dir/grid_detect.cpp.i
-.PHONY : grid_detect.cpp.i
+sudoku_solver_main.cpp.i:
+	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/sudoku_solver_main.cpp.i
+.PHONY : sudoku_solver_main.cpp.i
 
-grid_detect.s: grid_detect.cpp.s
+sudoku_solver_main.s: sudoku_solver_main.cpp.s
 
-.PHONY : grid_detect.s
+.PHONY : sudoku_solver_main.s
 
 # target to generate assembly for a file
-grid_detect.cpp.s:
-	$(MAKE) -f CMakeFiles/grid_detect.dir/build.make CMakeFiles/grid_detect.dir/grid_detect.cpp.s
-.PHONY : grid_detect.cpp.s
+sudoku_solver_main.cpp.s:
+	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/sudoku_solver_main.cpp.s
+.PHONY : sudoku_solver_main.cpp.s
 
 # Help Target
 help:
@@ -157,11 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... grid_detect"
+	@echo "... sudoku_solver_main"
 	@echo "... edit_cache"
-	@echo "... grid_detect.o"
-	@echo "... grid_detect.i"
-	@echo "... grid_detect.s"
+	@echo "... sudoku_solver_main.o"
+	@echo "... sudoku_solver_main.i"
+	@echo "... sudoku_solver_main.s"
 .PHONY : help
 
 

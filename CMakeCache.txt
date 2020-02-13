@@ -130,7 +130,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=grid_detect
+CMAKE_PROJECT_NAME:STATIC=sudoku_solver_main
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -207,6 +207,12 @@ grid_detect_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake
 grid_detect_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+sudoku_solver_main_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+sudoku_solver_main_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 
 ########################

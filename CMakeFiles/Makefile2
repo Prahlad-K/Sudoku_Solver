@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /home/prahlad/Sudoku_Solver
 CMAKE_BINARY_DIR = /home/prahlad/Sudoku_Solver
 
 #=============================================================================
-# Target rules for target CMakeFiles/grid_detect.dir
+# Target rules for target CMakeFiles/sudoku_solver_main.dir
 
 # All Build rule for target.
-CMakeFiles/grid_detect.dir/all:
-	$(MAKE) -f CMakeFiles/grid_detect.dir/build.make CMakeFiles/grid_detect.dir/depend
-	$(MAKE) -f CMakeFiles/grid_detect.dir/build.make CMakeFiles/grid_detect.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/prahlad/Sudoku_Solver/CMakeFiles --progress-num=1,2 "Built target grid_detect"
-.PHONY : CMakeFiles/grid_detect.dir/all
+CMakeFiles/sudoku_solver_main.dir/all:
+	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/depend
+	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/prahlad/Sudoku_Solver/CMakeFiles --progress-num=1,2 "Built target sudoku_solver_main"
+.PHONY : CMakeFiles/sudoku_solver_main.dir/all
 
 # Include target in all.
-all: CMakeFiles/grid_detect.dir/all
+all: CMakeFiles/sudoku_solver_main.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/grid_detect.dir/rule: cmake_check_build_system
+CMakeFiles/sudoku_solver_main.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/prahlad/Sudoku_Solver/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/grid_detect.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/sudoku_solver_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/prahlad/Sudoku_Solver/CMakeFiles 0
-.PHONY : CMakeFiles/grid_detect.dir/rule
+.PHONY : CMakeFiles/sudoku_solver_main.dir/rule
 
 # Convenience name for target.
-grid_detect: CMakeFiles/grid_detect.dir/rule
+sudoku_solver_main: CMakeFiles/sudoku_solver_main.dir/rule
 
-.PHONY : grid_detect
-
-# clean rule for target.
-CMakeFiles/grid_detect.dir/clean:
-	$(MAKE) -f CMakeFiles/grid_detect.dir/build.make CMakeFiles/grid_detect.dir/clean
-.PHONY : CMakeFiles/grid_detect.dir/clean
+.PHONY : sudoku_solver_main
 
 # clean rule for target.
-clean: CMakeFiles/grid_detect.dir/clean
+CMakeFiles/sudoku_solver_main.dir/clean:
+	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/clean
+.PHONY : CMakeFiles/sudoku_solver_main.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/sudoku_solver_main.dir/clean
 
 .PHONY : clean
 
