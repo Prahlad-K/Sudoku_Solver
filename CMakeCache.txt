@@ -130,7 +130,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=sudoku_solver_main
+CMAKE_PROJECT_NAME:STATIC=sudoku_former
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -209,6 +209,12 @@ grid_detect_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
 grid_detect_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake
+knn_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+knn_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
 morph_operations_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake
@@ -219,6 +225,12 @@ preprocessing_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake
 preprocessing_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+sudoku_former_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+sudoku_former_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake
 sudoku_solver_main_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver

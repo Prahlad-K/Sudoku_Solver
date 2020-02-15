@@ -18,8 +18,8 @@ int main(int argc, char* argv[])
 		Mat train_data_mat, train_label_mat;
 		Mat test_data_mat, test_label_mat;
 		
-		loadMNIST("./MNIST/mnist_train.csv", train_data_mat, train_label_mat);
-		loadMNIST("./MNIST/mnist_test.csv", test_data_mat, test_label_mat);
+		loadMNIST("/home/prahlad/MNIST/mnist_train.csv", train_data_mat, train_label_mat);
+		loadMNIST("/home/prahlad/MNIST/mnist_test.csv", test_data_mat, test_label_mat);
 		
 		train_data_mat.convertTo(train_data_mat, CV_32FC1);
 		train_label_mat.convertTo(train_label_mat, CV_32SC1);
@@ -36,15 +36,12 @@ int main(int argc, char* argv[])
 		for (int idx = 0; idx < test_label_mat.rows; idx++) {
 			Mat result_mat;
 			Mat temp = test_data_mat.row(idx);
-			cout<<temp.rows<<" "<<temp.cols<<"\n";
 			float response = knn->findNearest(temp, knn->getDefaultK(), result_mat);
 			if(test_label_mat.at<uchar>(idx, 0) == (uchar)response) {
 
-				cout<<(int)test_label_mat.at<uchar>(idx, 0)<<" "<<(int)response<<endl;
-
 				correct_count++;
-				cout<<"Increased: "<<correct_count<<endl;
-				break;
+				if(correct_count%1000==0)
+					cout<<correct_count<<endl;
 			}
 		}
 

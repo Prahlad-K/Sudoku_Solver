@@ -56,9 +56,16 @@ Mat removeBorders(Mat image)
 //  bitwise_or(image, mask_img, result);
     subtract(image, mask_img, result);
 
-    namedWindow("result", CV_WINDOW_AUTOSIZE);
-    imshow("result", result);
-    waitKey(0);
+    element = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1,-1) );
+    erode(result, result, element);
+    dilate(result, result, element);
+
+    element = getStructuringElement(MORPH_RECT, Size(2, 2), Point(-1,-1) );
+    erode(result, result, element);
+
+    // namedWindow("result", CV_WINDOW_AUTOSIZE);
+    // imshow("result", result);
+    // waitKey(0);
 
     return result;
 
@@ -151,7 +158,7 @@ int main()
 {
 	//reading and storing the sudoku image
 	//assuming the sudoku grid forms the major part of the image
-	Mat sudoku = imread("sudoku.jpg", 0);
+	Mat sudoku = imread("sudoku2.jpeg", 0);
 	//0 for grayscale 
 
 	//create a same sized empty image container
@@ -407,17 +414,17 @@ int main()
 	src[2] = ptBottomRight;        dst[2] = Point2f(maxLength-1, maxLength-1);
 	src[3] = ptBottomLeft;        dst[3] = Point2f(0, maxLength-1);
 
-	Mat original = imread("sudoku.jpg", 0);
+	Mat original = imread("sudoku2.jpeg", 0);
 
 	Mat undistorted = Mat(Size(maxLength, maxLength), CV_8UC1);
 	cv::warpPerspective(original, undistorted, cv::getPerspectiveTransform(src, dst), Size(maxLength, maxLength));	
 
-    imwrite("undistorted_sudoku.jpg", undistorted);
+    imwrite("undistorted_sudoku2.jpg", undistorted);
 
     Mat undistortedThreshed = undistorted.clone();
     adaptiveThreshold(undistorted, undistortedThreshed, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY_INV, 101, 1);
 
-    imwrite("undistorted_th_sudoku.jpg", undistortedThreshed);
+    imwrite("undistorted_th_sudoku2.jpg", undistortedThreshed);
 
     undistortedThreshed = removeBorders(undistortedThreshed);
 
@@ -447,17 +454,17 @@ int main()
                 }
             }            
 
-            // Moments m = cv::moments(currentCell, true);
-            // int area = m.m00;
-            // if(area > currentCell.rows*currentCell.cols/5)
-            // {
+             Moments m = cv::moments(currentCell, true);
+             int area = m.m00;
+            if(area > 0)
+            {
                 int number = dr->classify(currentCell);
                 printf("%d ", number);
-            // }
-            // else
-            // {
+            }
+            else
+            {
                 printf("  ");
-            //}
+            }
         }
         printf("\n");
     }

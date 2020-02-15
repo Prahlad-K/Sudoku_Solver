@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named sudoku_solver_main
+# Target rules for targets named sudoku_former
 
 # Build rule for target.
-sudoku_solver_main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 sudoku_solver_main
-.PHONY : sudoku_solver_main
+sudoku_former: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sudoku_former
+.PHONY : sudoku_former
 
 # fast build rule for target.
-sudoku_solver_main/fast:
-	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/build
-.PHONY : sudoku_solver_main/fast
+sudoku_former/fast:
+	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/build
+.PHONY : sudoku_former/fast
 
-sudoku_solver_main.o: sudoku_solver_main.cpp.o
+sudoku_former.o: sudoku_former.cpp.o
 
-.PHONY : sudoku_solver_main.o
+.PHONY : sudoku_former.o
 
 # target to build an object file
-sudoku_solver_main.cpp.o:
-	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/sudoku_solver_main.cpp.o
-.PHONY : sudoku_solver_main.cpp.o
+sudoku_former.cpp.o:
+	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/sudoku_former.cpp.o
+.PHONY : sudoku_former.cpp.o
 
-sudoku_solver_main.i: sudoku_solver_main.cpp.i
+sudoku_former.i: sudoku_former.cpp.i
 
-.PHONY : sudoku_solver_main.i
+.PHONY : sudoku_former.i
 
 # target to preprocess a source file
-sudoku_solver_main.cpp.i:
-	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/sudoku_solver_main.cpp.i
-.PHONY : sudoku_solver_main.cpp.i
+sudoku_former.cpp.i:
+	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/sudoku_former.cpp.i
+.PHONY : sudoku_former.cpp.i
 
-sudoku_solver_main.s: sudoku_solver_main.cpp.s
+sudoku_former.s: sudoku_former.cpp.s
 
-.PHONY : sudoku_solver_main.s
+.PHONY : sudoku_former.s
 
 # target to generate assembly for a file
-sudoku_solver_main.cpp.s:
-	$(MAKE) -f CMakeFiles/sudoku_solver_main.dir/build.make CMakeFiles/sudoku_solver_main.dir/sudoku_solver_main.cpp.s
-.PHONY : sudoku_solver_main.cpp.s
+sudoku_former.cpp.s:
+	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/sudoku_former.cpp.s
+.PHONY : sudoku_former.cpp.s
 
 # Help Target
 help:
@@ -157,11 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... sudoku_solver_main"
+	@echo "... sudoku_former"
 	@echo "... edit_cache"
-	@echo "... sudoku_solver_main.o"
-	@echo "... sudoku_solver_main.i"
-	@echo "... sudoku_solver_main.s"
+	@echo "... sudoku_former.o"
+	@echo "... sudoku_former.i"
+	@echo "... sudoku_former.s"
 .PHONY : help
 
 

@@ -37,6 +37,9 @@ Mat removeBorders(Mat image)
 //	bitwise_or(image, mask_img, result);
 	subtract(image, mask_img, result);
 
+	// element = getStructuringElement(MORPH_RECT, Size(2, 2), Point(-1,-1) );
+	// erode(result, result, element);
+
 	namedWindow("result", CV_WINDOW_AUTOSIZE);
 	imshow("result", result);
 	waitKey(0);
