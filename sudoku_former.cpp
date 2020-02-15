@@ -63,6 +63,9 @@ Mat removeBorders(Mat image)
     element = getStructuringElement(MORPH_RECT, Size(2, 2), Point(-1,-1) );
     erode(result, result, element);
 
+    //blur(result, result, Size(3, 3), Point(-1,-1));
+    //GaussianBlur(result, result, Size(3, 3),0,0);
+
     // namedWindow("result", CV_WINDOW_AUTOSIZE);
     // imshow("result", result);
     // waitKey(0);
@@ -154,11 +157,20 @@ void mergeRelatedLines(vector<Vec2f>*lines, Mat &img)
 	}
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	//reading and storing the sudoku image
 	//assuming the sudoku grid forms the major part of the image
-	Mat sudoku = imread("sudoku2.jpeg", 0);
+
+    if(argc<2)
+    {    
+        cout<<"Format: ./sudoku_former <image_path>"<<endl;
+        exit(0);
+    }
+
+    char* path = argv[1];
+
+	Mat sudoku = imread(path, 0);
 	//0 for grayscale 
 
 	//create a same sized empty image container
@@ -414,17 +426,17 @@ int main()
 	src[2] = ptBottomRight;        dst[2] = Point2f(maxLength-1, maxLength-1);
 	src[3] = ptBottomLeft;        dst[3] = Point2f(0, maxLength-1);
 
-	Mat original = imread("sudoku2.jpeg", 0);
+	Mat original = imread(path, 0);
 
 	Mat undistorted = Mat(Size(maxLength, maxLength), CV_8UC1);
 	cv::warpPerspective(original, undistorted, cv::getPerspectiveTransform(src, dst), Size(maxLength, maxLength));	
 
-    imwrite("undistorted_sudoku2.jpg", undistorted);
+    imwrite("undistorted_sudoku.jpg", undistorted);
 
     Mat undistortedThreshed = undistorted.clone();
     adaptiveThreshold(undistorted, undistortedThreshed, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY_INV, 101, 1);
 
-    imwrite("undistorted_th_sudoku2.jpg", undistortedThreshed);
+    imwrite("undistorted_th_sudoku.jpg", undistortedThreshed);
 
     undistortedThreshed = removeBorders(undistortedThreshed);
 
@@ -439,8 +451,12 @@ int main()
 
     Mat currentCell = Mat(dist, dist, CV_8UC1);
 
+    vector<vector<int>> sudoku_;
+
     for(int j=0;j<9;j++)
     {
+        vector<int> row;
+        row.clear();
         for(int i=0;i<9;i++)
         {
             for(int y=0;y<dist && j*dist+y<undistortedThreshed.cols;y++)
@@ -460,14 +476,46 @@ int main()
             {
                 int number = dr->classify(currentCell);
                 printf("%d ", number);
+                row.push_back(number);
+
             }
             else
             {
-                printf("  ");
+                row.push_back(0);
+                printf("0 ");
             }
         }
+        sudoku_.push_back(row);
         printf("\n");
     }
+
+    cout<<"Enter the reference sudoku: \n";
+    vector<vector<int>> ref_sudoku;
+    for(int i=0;i<sudoku_.size();i++)
+    {
+        int element;
+        vector<int> row;
+        row.clear();
+        for(int j=0;j<sudoku_.size();j++)
+        {
+            cin>>element;
+            row.push_back(element);
+        }
+        ref_sudoku.push_back(row);
+    }
+
+    float accuracy=0;
+    for(int i=0;i<sudoku_.size();i++)
+    {
+        for(int j=0;j<sudoku_.size();j++)
+        {
+            if(sudoku_[i][j]==ref_sudoku[i][j])
+                accuracy++;
+        }
+    }
+    accuracy =accuracy/(sudoku_.size() * sudoku_.size());
+
+    cout<<"Accuracy of Sudoku formation: "<<accuracy<<endl;
 
     return 0;
 }
