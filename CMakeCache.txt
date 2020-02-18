@@ -130,7 +130,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=sudoku_former
+CMAKE_PROJECT_NAME:STATIC=knn
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -219,6 +219,12 @@ morph_operations_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake
 morph_operations_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+nn_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver
+
+//Value Computed by CMake
+nn_SOURCE_DIR:STATIC=/home/prahlad/Sudoku_Solver
 
 //Value Computed by CMake
 preprocessing_BINARY_DIR:STATIC=/home/prahlad/Sudoku_Solver

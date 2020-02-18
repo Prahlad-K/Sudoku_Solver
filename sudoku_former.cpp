@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "digit_recognizer.cpp"
+#include "sudoku_solver.cpp"
 
 using namespace cv;
 using namespace std;
@@ -426,11 +427,14 @@ int main(int argc, char** argv)
 	src[2] = ptBottomRight;        dst[2] = Point2f(maxLength-1, maxLength-1);
 	src[3] = ptBottomLeft;        dst[3] = Point2f(0, maxLength-1);
 
+    // let's read the original again to warp it using our above derived points
 	Mat original = imread(path, 0);
 
 	Mat undistorted = Mat(Size(maxLength, maxLength), CV_8UC1);
+    // warping the original
 	cv::warpPerspective(original, undistorted, cv::getPerspectiveTransform(src, dst), Size(maxLength, maxLength));	
 
+    // saving the image
     imwrite("undistorted_sudoku.jpg", undistorted);
 
     Mat undistortedThreshed = undistorted.clone();
@@ -470,24 +474,20 @@ int main(int argc, char** argv)
                 }
             }            
 
-             Moments m = cv::moments(currentCell, true);
-             int area = m.m00;
-            if(area > 0)
-            {
-                int number = dr->classify(currentCell);
-                printf("%d ", number);
-                row.push_back(number);
-
-            }
-            else
-            {
-                row.push_back(0);
-                printf("0 ");
-            }
+         
+            int number = dr->classify(currentCell);
+            printf("%d ", number);
+            row.push_back(number);
         }
         sudoku_.push_back(row);
         printf("\n");
     }
+
+    // SudokuSolver s = SudokuSolver(sudoku_);
+    // if(s.solveSudoku())
+    //     vector<vector<int>> answer = s.printSudoku();
+    // else
+    //     cout<<"Could not solve!\n";
 
     cout<<"Enter the reference sudoku: \n";
     vector<vector<int>> ref_sudoku;

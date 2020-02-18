@@ -148,9 +148,17 @@ bool DigitRecognizer::train(char *path)
 int DigitRecognizer::classify(cv::Mat img)
 {    
     Mat cloneImg = preprocessImage(img);
-    Mat result_mat;
-	int response = knn->findNearest(cloneImg, knn->getDefaultK(), result_mat);
-    return response;
+
+    Moments m = cv::moments(cloneImg, true);
+    int area = m.m00;
+    if(area > 0)
+    {
+        Mat result_mat;
+        int response = knn->findNearest(cloneImg, knn->getDefaultK(), result_mat);
+        return response;
+    }
+    else
+        return 0;
 }
 
 Mat DigitRecognizer::preprocessImage(Mat img)

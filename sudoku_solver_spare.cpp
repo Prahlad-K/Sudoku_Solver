@@ -2,25 +2,8 @@
 
 using namespace std;
 
-class SudokuSolver
-{
-private:
-	vector<vector<int>> sudoku;
-	vector<int> getPossibleValues(int row, int col);
-	bool isSudokuSolved();
-public:
-	SudokuSolver(vector<vector<int>> input);
-	vector<vector<int>> printSudoku();
-	bool solveSudoku();
-};
 
-
-SudokuSolver::SudokuSolver(vector<vector<int>> input)
-{
-	sudoku.assign(input.begin(), input.end()); 
-}
-
-vector<int> SudokuSolver::getPossibleValues(int row, int col)
+vector<int> getPossibleValues(vector<vector<int>> sudoku, int row, int col)
 {
 	set<int> other_values;
 
@@ -66,7 +49,7 @@ vector<int> SudokuSolver::getPossibleValues(int row, int col)
 
 }
 
-bool SudokuSolver::isSudokuSolved()
+bool isSudokuSolved(vector<vector<int>> sudoku)
 {
 	for(int i=0;i<sudoku.size();i++)
 	{
@@ -78,7 +61,7 @@ bool SudokuSolver::isSudokuSolved()
 	}
 	return true;
 }
-vector<vector<int>> SudokuSolver::printSudoku()
+void printSudoku(vector<vector<int>>& sudoku)
 {
 	for(int i=0;i<sudoku.size();i++)
 	{
@@ -88,15 +71,14 @@ vector<vector<int>> SudokuSolver::printSudoku()
 		}
 	cout<<endl;
 	}
-	return sudoku;
 }	
 
 
 
-bool SudokuSolver::solveSudoku()
+bool solveSudoku(vector<vector<int>>& sudoku)
 {
 
-	if(isSudokuSolved())
+	if(isSudokuSolved(sudoku))
 		return true;
 
 	for(int i=0;i<sudoku.size();i++)
@@ -105,7 +87,7 @@ bool SudokuSolver::solveSudoku()
 		{
 			if(sudoku[i][j]==0)
 			{
-				vector<int> possible_values = getPossibleValues(i, j);
+				vector<int> possible_values = getPossibleValues(sudoku, i, j);
 				// cout<<i<<", "<<j<<endl;
 				// for(int k=0;k<possible_values.size();k++)
 				// {
@@ -119,9 +101,9 @@ bool SudokuSolver::solveSudoku()
 				for(int k=0;k<possible_values.size();k++)
 				{
 					sudoku[i][j] = possible_values[k];
-					 printSudoku();
-					 cout<<"________________________________\n";
-					if(solveSudoku())
+					// printSudoku(sudoku);
+					// cout<<"________________________________\n";
+					if(solveSudoku(sudoku))
 						return true;
 					sudoku[i][j] = 0;
 				}
@@ -135,6 +117,34 @@ bool SudokuSolver::solveSudoku()
 }
 
 
+
+int main()
+{
+	vector<vector<int>> sudoku;
+
+	int n;
+	cin>>n;
+
+	for(int i=0;i<n;i++)
+	{
+		int element;
+		vector<int> row;
+		row.clear();
+		for(int j=0;j<n;j++)
+		{
+			cin>>element;
+			row.push_back(element);
+		}
+		sudoku.push_back(row);
+	}
+
+	if(solveSudoku(sudoku))
+		cout<<"Solved!"<<endl;
+	else
+		cout<<"Couldn't be solved, kindly check your input."<<endl;
+
+	printSudoku(sudoku);
+}
 /*
 9
 3 0 6 5 0 8 4 0 0 

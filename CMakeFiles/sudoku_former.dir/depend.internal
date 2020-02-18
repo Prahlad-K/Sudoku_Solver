@@ -5,6 +5,7 @@ CMakeFiles/sudoku_former.dir/sudoku_former.cpp.o
  /home/prahlad/Sudoku_Solver/digit_recognizer.cpp
  /home/prahlad/Sudoku_Solver/digit_recognizer.h
  /home/prahlad/Sudoku_Solver/sudoku_former.cpp
+ /home/prahlad/Sudoku_Solver/sudoku_solver.cpp
  /usr/include/opencv/cv.h
  /usr/include/opencv/highgui.h
  /usr/include/opencv/ml.h

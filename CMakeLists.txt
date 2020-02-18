@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project( sudoku_former )
+project( knn )
 find_package( OpenCV REQUIRED )
-add_executable( sudoku_former sudoku_former.cpp )
-target_link_libraries( sudoku_former ${OpenCV_LIBS} )
+add_executable( knn knn.cpp )
+target_link_libraries( knn ${OpenCV_LIBS} )

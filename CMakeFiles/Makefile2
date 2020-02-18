@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /home/prahlad/Sudoku_Solver
 CMAKE_BINARY_DIR = /home/prahlad/Sudoku_Solver
 
 #=============================================================================
-# Target rules for target CMakeFiles/sudoku_former.dir
+# Target rules for target CMakeFiles/knn.dir
 
 # All Build rule for target.
-CMakeFiles/sudoku_former.dir/all:
-	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/depend
-	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/prahlad/Sudoku_Solver/CMakeFiles --progress-num=1,2 "Built target sudoku_former"
-.PHONY : CMakeFiles/sudoku_former.dir/all
+CMakeFiles/knn.dir/all:
+	$(MAKE) -f CMakeFiles/knn.dir/build.make CMakeFiles/knn.dir/depend
+	$(MAKE) -f CMakeFiles/knn.dir/build.make CMakeFiles/knn.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/prahlad/Sudoku_Solver/CMakeFiles --progress-num=1,2 "Built target knn"
+.PHONY : CMakeFiles/knn.dir/all
 
 # Include target in all.
-all: CMakeFiles/sudoku_former.dir/all
+all: CMakeFiles/knn.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/sudoku_former.dir/rule: cmake_check_build_system
+CMakeFiles/knn.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/prahlad/Sudoku_Solver/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/sudoku_former.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/knn.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/prahlad/Sudoku_Solver/CMakeFiles 0
-.PHONY : CMakeFiles/sudoku_former.dir/rule
+.PHONY : CMakeFiles/knn.dir/rule
 
 # Convenience name for target.
-sudoku_former: CMakeFiles/sudoku_former.dir/rule
+knn: CMakeFiles/knn.dir/rule
 
-.PHONY : sudoku_former
-
-# clean rule for target.
-CMakeFiles/sudoku_former.dir/clean:
-	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/clean
-.PHONY : CMakeFiles/sudoku_former.dir/clean
+.PHONY : knn
 
 # clean rule for target.
-clean: CMakeFiles/sudoku_former.dir/clean
+CMakeFiles/knn.dir/clean:
+	$(MAKE) -f CMakeFiles/knn.dir/build.make CMakeFiles/knn.dir/clean
+.PHONY : CMakeFiles/knn.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/knn.dir/clean
 
 .PHONY : clean
 

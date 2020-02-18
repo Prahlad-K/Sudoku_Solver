@@ -135,9 +135,9 @@ int loadMNIST(const string csv_filename, Mat& training_data, Mat& label_data) {
     	}
     }
 
-    //cvNamedWindow("Onecell");
-    //imshow("Onecell", one_cell);
-    //waitKey(0);
+    cvNamedWindow("Onecell");
+    imshow("Onecell", one_cell);
+    waitKey(0);
 
     for(int i=0;i<label_data.rows;i++)
     {
