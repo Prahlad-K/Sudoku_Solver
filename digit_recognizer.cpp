@@ -252,9 +252,9 @@ int DigitRecognizer::classify(cv::Mat img)
 Mat DigitRecognizer::preprocessImage(Mat img)
 {
 
-	namedWindow("img", CV_WINDOW_AUTOSIZE);
-	imshow("img", img);
-	waitKey(0);
+	// namedWindow("img", CV_WINDOW_AUTOSIZE);
+	// imshow("img", img);
+	// waitKey(0);
     int rowTop=-1, rowBottom=-1, colLeft=-1, colRight=-1;
 
     Mat temp;
@@ -322,9 +322,9 @@ Mat DigitRecognizer::preprocessImage(Mat img)
 
     resize(newImg, cloneImg, Size(numCols, numRows));
 
-    namedWindow("cloneImg1", CV_WINDOW_AUTOSIZE);
-	imshow("cloneImg1", cloneImg);
-	waitKey(0);
+ //    namedWindow("cloneImg1", CV_WINDOW_AUTOSIZE);
+	// imshow("cloneImg1", cloneImg);
+	// waitKey(0);
 
     // Now fill along the borders
     for(int i=0;i<cloneImg.rows;i++)

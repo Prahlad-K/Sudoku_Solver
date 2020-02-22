@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named knn
+# Target rules for targets named sudoku_former
 
 # Build rule for target.
-knn: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 knn
-.PHONY : knn
+sudoku_former: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sudoku_former
+.PHONY : sudoku_former
 
 # fast build rule for target.
-knn/fast:
-	$(MAKE) -f CMakeFiles/knn.dir/build.make CMakeFiles/knn.dir/build
-.PHONY : knn/fast
+sudoku_former/fast:
+	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/build
+.PHONY : sudoku_former/fast
 
-knn.o: knn.cpp.o
+sudoku_former.o: sudoku_former.cpp.o
 
-.PHONY : knn.o
+.PHONY : sudoku_former.o
 
 # target to build an object file
-knn.cpp.o:
-	$(MAKE) -f CMakeFiles/knn.dir/build.make CMakeFiles/knn.dir/knn.cpp.o
-.PHONY : knn.cpp.o
+sudoku_former.cpp.o:
+	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/sudoku_former.cpp.o
+.PHONY : sudoku_former.cpp.o
 
-knn.i: knn.cpp.i
+sudoku_former.i: sudoku_former.cpp.i
 
-.PHONY : knn.i
+.PHONY : sudoku_former.i
 
 # target to preprocess a source file
-knn.cpp.i:
-	$(MAKE) -f CMakeFiles/knn.dir/build.make CMakeFiles/knn.dir/knn.cpp.i
-.PHONY : knn.cpp.i
+sudoku_former.cpp.i:
+	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/sudoku_former.cpp.i
+.PHONY : sudoku_former.cpp.i
 
-knn.s: knn.cpp.s
+sudoku_former.s: sudoku_former.cpp.s
 
-.PHONY : knn.s
+.PHONY : sudoku_former.s
 
 # target to generate assembly for a file
-knn.cpp.s:
-	$(MAKE) -f CMakeFiles/knn.dir/build.make CMakeFiles/knn.dir/knn.cpp.s
-.PHONY : knn.cpp.s
+sudoku_former.cpp.s:
+	$(MAKE) -f CMakeFiles/sudoku_former.dir/build.make CMakeFiles/sudoku_former.dir/sudoku_former.cpp.s
+.PHONY : sudoku_former.cpp.s
 
 # Help Target
 help:
@@ -157,11 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... knn"
+	@echo "... sudoku_former"
 	@echo "... edit_cache"
-	@echo "... knn.o"
-	@echo "... knn.i"
-	@echo "... knn.s"
+	@echo "... sudoku_former.o"
+	@echo "... sudoku_former.i"
+	@echo "... sudoku_former.s"
 .PHONY : help
 
 
