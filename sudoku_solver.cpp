@@ -180,6 +180,4 @@ bool SudokuSolver::solveSudoku()
 0 0 0 0 0 3 9 0 8
 9 0 1 0 0 0 0 0 0 
 
-9 
-
 */

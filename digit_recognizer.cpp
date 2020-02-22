@@ -327,15 +327,15 @@ Mat DigitRecognizer::preprocessImage(Mat img)
 	// waitKey(0);
 
     // Now fill along the borders
-    for(int i=0;i<cloneImg.rows;i++)
-    {
-        floodFill(cloneImg, cvPoint(0, i), cvScalar(0,0,0));
+    // for(int i=0;i<cloneImg.rows;i++)
+    // {
+    //     floodFill(cloneImg, cvPoint(0, i), cvScalar(0,0,0));
 
-        floodFill(cloneImg, cvPoint(cloneImg.cols-1, i), cvScalar(0,0,0));
+    //     floodFill(cloneImg, cvPoint(cloneImg.cols-1, i), cvScalar(0,0,0));
 
-        floodFill(cloneImg, cvPoint(i, 0), cvScalar(0));
-        floodFill(cloneImg, cvPoint(i, cloneImg.rows-1), cvScalar(0));
-    }
+    //     floodFill(cloneImg, cvPoint(i, 0), cvScalar(0));
+    //     floodFill(cloneImg, cvPoint(i, cloneImg.rows-1), cvScalar(0));
+    // }
 
  //    namedWindow("cloneImg", CV_WINDOW_AUTOSIZE);
 	// imshow("cloneImg", cloneImg);
