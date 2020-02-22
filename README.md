@@ -1,3 +1,4 @@
+
 # Sudoku_Solver
 A simple image processing application that uses OpenCV and C++ to solve any given 10x10 sudoku puzzles, by reading images of them taken from a newspaper!
 
@@ -39,6 +40,23 @@ Each cell image would need to be classified to get the number present within the
 A straightforward backtracking based algorithm is implemented that can solve any solvable sudoku. 
 
 ## Progress So Far
-The accuracy of sudoku formation is only at 92.3 %. 
+The accuracy of sudoku formation is only at 92.6 %. 
 To solve a sudoku, we would require a 100 % accurate sudoku formation! 
 
+## Executing this application
+#### Requirements:
+
+    OpenCV>=3.4.0
+    gcc version 7.4.0
+#### Running the application:
+
+    >cd Sudoku_Solver
+    >make
+    >./sudoku_former sudoku.jpg
+    Press <Enter> upon viewing the Undistorted image
+    Paste the reference sudoku present in Reference_Sudokus.txt
+
+
+
+## References
+[https://aishack.in/tutorials/sudoku-grabber-opencv-plot/](https://aishack.in/tutorials/sudoku-grabber-opencv-plot/)       
