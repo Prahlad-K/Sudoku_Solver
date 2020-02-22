@@ -1,4 +1,5 @@
 
+
 # Sudoku_Solver
 A simple image processing application that uses OpenCV and C++ to solve any given 10x10 sudoku puzzles, by reading images of them taken from a newspaper!
 
@@ -48,15 +49,19 @@ To solve a sudoku, we would require a 100 % accurate sudoku formation!
 
     OpenCV>=3.4.0
     gcc version 7.4.0
+    MNIST database in .csv files
 #### Running the application:
 
-    >cd Sudoku_Solver
-    >make
-    >./sudoku_former sudoku.jpg
+	> git clone .
+    > cd Sudoku_Solver
+    Edit paths to the MNIST database in sudoku_former.cpp
+    > make
+    > ./sudoku_former sudoku.jpg
     Press <Enter> upon viewing the Undistorted image
     Paste the reference sudoku present in Reference_Sudokus.txt
 
 
 
 ## References
-[https://aishack.in/tutorials/sudoku-grabber-opencv-plot/](https://aishack.in/tutorials/sudoku-grabber-opencv-plot/)       
+[AI Shack| Sudoku Grabber using OpenCV](https://aishack.in/tutorials/sudoku-grabber-opencv-plot/) 
+[MNIST database in csv](https://pjreddie.com/projects/mnist-in-csv/)
