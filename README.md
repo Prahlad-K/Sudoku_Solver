@@ -5,7 +5,7 @@ A simple image processing application that uses OpenCV and C++ to solve any give
 An arbitrary sized image of any newspaper sudoku puzzle. 
 
 ## Output - Aim
-The solved sudoku, displayed to the user 
+The solved sudoku, displayed to the user. 
 
 ## Major Steps Involved
 
