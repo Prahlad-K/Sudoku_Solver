@@ -40,9 +40,74 @@ int DigitRecognizer::readFlippedInteger(int i)
 
 }
 
-int DigitRecognizer::loadMNIST(char* csv_filename, Mat& training_data, Mat& label_data) {
+void computeHOGs( const Size wsize, const vector< Mat > & img_lst, vector< Mat > & gradient_lst, bool use_flip )
+{
+    Size blockSize = Size(14,14);
+    Size blockStride = Size(7,7);
+    Size cellSize = Size(14,14);
+    int nbins = 9;
 
-	fstream fin; 
+    HOGDescriptor hog(wsize, blockSize, blockStride, cellSize, nbins);
+
+    Mat gray;
+    vector< float > descriptors;
+
+    for( size_t i = 0 ; i < img_lst.size(); i++ )
+    {
+        if ( img_lst[i].cols >= wsize.width && img_lst[i].rows >= wsize.height )
+        {
+            // Rect r = Rect(( img_lst[i].cols - wsize.width ) / 2,
+            //               ( img_lst[i].rows - wsize.height ) / 2,
+            //               wsize.width,
+            //               wsize.height);
+            // //cvtColor( img_lst[i](r), gray, COLOR_BGR2GRAY );
+            // Mat gray = img_lst[i](r);
+
+            // cvNamedWindow("gray");
+            // imshow("gray",  img_lst[i]);
+            // waitKey(0);
+
+            hog.compute( img_lst[i], descriptors, Size( 7, 7 ), Size( 0, 0 ) );
+            gradient_lst.push_back( Mat( descriptors ).clone() );
+            //cout<<descriptors.size()<<endl;
+            if ( use_flip )
+            {
+                flip( img_lst[i], img_lst[i], 1 );
+                hog.compute( img_lst[i], descriptors, Size( 7, 7 ), Size( 0, 0 ) );
+                gradient_lst.push_back( Mat( descriptors ).clone() );
+            }
+        }
+    }
+}
+
+void convert_to_ml( const vector< Mat > & train_samples, Mat& trainData )
+{
+    //--Convert data
+    const int rows = (int)train_samples.size();
+    const int cols = (int)std::max( train_samples[0].cols, train_samples[0].rows );
+    Mat tmp( 1, cols, CV_32FC1 ); //< used for transposition if needed
+    trainData = Mat( rows, cols, CV_32FC1 );
+
+    for( size_t i = 0 ; i < train_samples.size(); ++i )
+    {
+        CV_Assert( train_samples[i].cols == 1 || train_samples[i].rows == 1 );
+
+        if( train_samples[i].cols == 1 )
+        {
+            transpose( train_samples[i], tmp );
+            tmp.copyTo( trainData.row( (int)i ) );
+        }
+        else if( train_samples[i].rows == 1 )
+        {
+            train_samples[i].copyTo( trainData.row( (int)i ) );
+        }
+    }
+}
+
+
+int DigitRecognizer::loadMNIST(char* csv_filename, Mat& training_data, Mat& label_data) 
+{
+    fstream fin; 
   
     // Open an existing file 
     fin.open(csv_filename, ios::in); 
@@ -85,36 +150,51 @@ int DigitRecognizer::loadMNIST(char* csv_filename, Mat& training_data, Mat& labe
 
     cout<<training_classes.size()<<" "<<training_vectors[0].size()<<endl;
 
-    training_data = Mat(training_classes.size(), training_vectors[0].size(), CV_8U);
+    //training_data = Mat(training_classes.size(), training_vectors[0].size(), CV_8U);
     label_data =  Mat(training_classes.size(), 1, CV_8U);
 
-    Mat one_cell = Mat(28, 28, CV_8U);
+    
 
-    for(int i=0;i<training_data.rows;i++)
-    {
-    	for(int j=0;j<training_data.cols;j++)
-    	{
-    		training_data.at<uchar>(i, j) = (uchar)training_vectors[i][j];
-    	}
-    }
-
-    int count = 0;
-    for(int i=0;i<28;i++)
-    {
-    	for(int j=0;j<28;j++)
-    	{
-    		one_cell.at<uchar>(i, j) = (uchar)training_vectors[0][count++];
-    	}
-    }
-
-    // cvNamedWindow("Onecell");
-    // imshow("Onecell", one_cell);
-    // waitKey(0);
+    // for(int i=0;i<training_data.rows;i++)
+    // {
+    //  for(int j=0;j<training_data.cols;j++)
+    //  {
+    //      training_data.at<uchar>(i, j) = (uchar)training_vectors[i][j];
+    //  }
+    // }
 
     for(int i=0;i<label_data.rows;i++)
     {
-    	label_data.at<uchar>(i, 0) = (uchar)training_classes[i];
+        label_data.at<uchar>(i, 0) = (uchar)training_classes[i];
     }
+
+    vector<Mat> list_of_images;
+
+    for(int k=0;k<training_vectors.size();k++)
+    {
+        int count = 0;
+        Mat one_cell = Mat(28, 28, CV_8U);
+        for(int i=0;i<28;i++)
+        {
+            for(int j=0;j<28;j++)
+            {
+                one_cell.at<uchar>(i, j) = (uchar)training_vectors[k][count++];
+            }
+        }
+        list_of_images.push_back(one_cell);
+
+        // if(k==2)
+        // {
+        //     cvNamedWindow("Onecell");
+        //     imshow("Onecell", one_cell);
+        //     waitKey(0);
+        // }
+    }
+
+    vector<Mat> gradient_lst;
+    computeHOGs(Size(28, 28), list_of_images, gradient_lst, false);
+
+    convert_to_ml(gradient_lst, training_data);
 
     return 1;
 }
@@ -153,8 +233,16 @@ int DigitRecognizer::classify(cv::Mat img)
     int area = m.m00;
     if(area > 0)
     {
+        Mat descriptor;
+        vector<Mat> list_of_images;
+        list_of_images.push_back(cloneImg);
+
+        vector<Mat> gradient_lst;
+        computeHOGs(Size(28, 28), list_of_images, gradient_lst, false);
+        convert_to_ml(gradient_lst, descriptor);
+
         Mat result_mat;
-        int response = knn->findNearest(cloneImg, knn->getDefaultK(), result_mat);
+        int response = knn->findNearest(descriptor, knn->getDefaultK(), result_mat);
         return response;
     }
     else
@@ -252,11 +340,8 @@ Mat DigitRecognizer::preprocessImage(Mat img)
  //    namedWindow("cloneImg", CV_WINDOW_AUTOSIZE);
 	// imshow("cloneImg", cloneImg);
 	// waitKey(0);
-    cloneImg.convertTo(cloneImg, CV_32FC1);
-    cloneImg = cloneImg.reshape(0, 1);
-
-	
-
+    //cloneImg.convertTo(cloneImg, CV_32FC1);
+    //cloneImg = cloneImg.reshape(0, 1);
 
     //cout<<"DigitRecognizer preproccessed!"<<endl;
 

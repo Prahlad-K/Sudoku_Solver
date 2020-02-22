@@ -1,6 +1,6 @@
 #include <cv.h>
 #include <highgui.h>
-
+#include<bits/stdc++.h>
 #include <ml.h>
 
 using namespace cv;
