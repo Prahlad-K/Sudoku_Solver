@@ -9,6 +9,16 @@ An arbitrary sized image of any newspaper sudoku puzzle.
 ## Output - Aim
 The solved sudoku, displayed to the user. 
 
+## Assumptions
+The input image:
+ 1.  Primarily contains the sudoku (i.e. is focused on the sudoku)
+ 2.  Is clear, and the grid lines of the sudoku are visible and distinct from background
+ 3.  Contains only one sudoku that isn't folded (but angle of capture can vary)
+ 4.  Doesn't have shadows
+ 5.  Doesn't have complicated noise (i.e. apart from noise that can be removed by smoothing)
+ 6.  Contains an unsolved sudoku
+ 7.  Is captured in atleast dimly lit environment
+
 ## Major Steps Involved
 
 #### Getting the Sudoku
@@ -40,10 +50,6 @@ Each cell image would need to be classified to get the number present within the
 #### Solving the sudoku
 A straightforward backtracking based algorithm is implemented that can solve any solvable sudoku. 
 
-## Progress So Far
-The accuracy of sudoku formation is only at 92.6 %. 
-To solve a sudoku, we would require a 100 % accurate sudoku formation! 
-
 ## Executing this application
 #### Requirements:
 
@@ -60,8 +66,15 @@ To solve a sudoku, we would require a 100 % accurate sudoku formation!
     Press <Enter> upon viewing the Undistorted image
     Paste the reference sudoku present in Reference_Sudokus.txt
 
-
+## Progress So Far
+The accuracy of sudoku formation is only at 92.6 %.
+Accuracy was calculated by the total number of correct grid cells classified.  
+For example, the digit "1" is being classified as digit "7". Or the digit "9" as "0", and so on. 
+To solve a sudoku, we would require a 100 % accurate sudoku formation, as even one misclassified digit could make the sudoku unsolvable. 
+Possible reasons behind this issue: KNN was trained on MNIST database of handwritten digits, but it's used on printed digits.
+Another reason could be the accuracy of the KNN itself - which is around 96.65 % (for a test set of 10,000 images).
 
 ## References
 [AI Shack| Sudoku Grabber using OpenCV](https://aishack.in/tutorials/sudoku-grabber-opencv-plot/) 
+
 [MNIST database in csv](https://pjreddie.com/projects/mnist-in-csv/)
