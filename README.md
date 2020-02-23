@@ -69,8 +69,10 @@ A straightforward backtracking based algorithm is implemented that can solve any
 ## Progress So Far
 The accuracy of sudoku formation is only at 92.6 %.
 Accuracy was calculated by the total number of correct grid cells classified.  
+
 For example, the digit "1" is being classified as digit "7". Or the digit "9" as "0", and so on. 
 To solve a sudoku, we would require a 100 % accurate sudoku formation, as even one misclassified digit could make the sudoku unsolvable. 
+
 Possible reasons behind this issue: KNN was trained on MNIST database of handwritten digits, but it's used on printed digits.
 Another reason could be the accuracy of the KNN itself - which is around 96.65 % (for a test set of 10,000 images).
 
